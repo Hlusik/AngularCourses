@@ -1,0 +1,4 @@
+<button mat-raised-button color="primary">
+    <mat-icon *ngIf="buttonImgName" aria-hidden="false">{{ buttonImgName }}</mat-icon>
+    <ng-container *ngIf="buttonText">{{ buttonText }}</ng-container>
+</button>

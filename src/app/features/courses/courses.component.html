@@ -1,0 +1,10 @@
+<app-header></app-header>
+
+<ng-container *ngIf="items; else infoBlock">
+    <ng-container *ngFor="let item of items | async">
+        <app-course [course]='item'></app-course>
+    </ng-container>
+</ng-container>
+<ng-template #infoBlock>
+    <app-info [title]="title" [text]="text" [buttonText]="buttonText"></app-info>
+</ng-template>
