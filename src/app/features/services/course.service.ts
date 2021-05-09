@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Author } from 'src/app/shared/components/models/author';
 import { Course } from 'src/app/shared/components/models/course';
 
 const mockedCourseList = [
-  new Course (
+  new Course(
     "de5aaa59-90f5-4dbc-b8a9-aaf205c551ba",
     "JavaScript",
     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -14,7 +15,7 @@ const mockedCourseList = [
     160,
     ["Vasiliy Dobkin", "Nicolas Kim"],
   ),
-  new Course (
+  new Course(
     "b5630fdd-7bf7-4d39-b75a-2b5906fd0916",
     "Angular",
     `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -27,12 +28,36 @@ const mockedCourseList = [
 ];
 const coursesPromise = Promise.resolve(mockedCourseList);
 
+const mockedAuthorsList = [
+  new Author(
+    1,
+    "Vasiliy Dobkin"
+  ),
+  new Author(
+    2,
+    "Nicolas Kim"
+  ),
+  new Author(
+    3,
+    "Anna Sidorenko"
+  ),
+  new Author(
+    4,
+    "Valentina Larina"
+  )
+];
+const authorsPromise = Promise.resolve(mockedAuthorsList);
+
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
 
-  getCourses(): Promise<Course[]>{
+  getCourses(): Promise<Course[]> {
     return coursesPromise;
+  }
+
+  getAuthors(): any {
+    return authorsPromise;
   }
 }
