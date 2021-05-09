@@ -1,0 +1,7 @@
+::ng-deep .mat-grid-tile .mat-figure{
+    justify-content: start;
+}
+.mat-card {
+    border: 1px solid green;
+    margin: 10px 0;
+}
