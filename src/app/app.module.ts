@@ -8,19 +8,18 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationComponent } from './src/app/features/registration/registration.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
     CoursesModule,
     NgbModule,
     BrowserAnimationsModule,
-    SharedModule,
-    LoginModule,
-    CourseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

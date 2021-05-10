@@ -5,6 +5,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 const Components = [HeaderComponent, ButtonComponent, InfoComponent, SearchComponent];
 
@@ -15,7 +17,9 @@ const Components = [HeaderComponent, ButtonComponent, InfoComponent, SearchCompo
     MatSliderModule,
     MatButtonModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
+    FormsModule
   ],
   exports: Components
 })

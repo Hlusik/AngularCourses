@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { User } from 'src/app/shared/components/models/user';
 
 @Component({
   selector: 'app-login',
@@ -8,20 +9,16 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  loginForm: FormGroup;
+  user: User = new User();
 
-  constructor(private fb: FormBuilder) {
-    this.loginForm = fb.group({
-      loginFormControl: new FormControl('', { validators: [Validators.pattern('[A-Za-z]+'), Validators.required ]}),
-      passwordFormControl: new FormControl('', { validators: [Validators.pattern('[a-zA-Z|0-9]+[0-9|a-zA-Z]+'), Validators.minLength(6), Validators.required] }),
-    });
+  constructor() {
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-
+  onSubmit(loginForm: NgForm): void {
+    console.log(`Saved: ${JSON.stringify(loginForm.value)}`);
   }
 
 }

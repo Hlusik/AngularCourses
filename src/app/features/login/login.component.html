@@ -1,12 +1,12 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     <p>
         <mat-form-field class="example-full-width" hintLabel="Only Latin letters" appearance="fill">
             <mat-label>Login</mat-label>
-            <input type="text" matInput formControlName="loginFormControl">
-            <mat-error *ngIf="loginForm.controls['loginFormControl'].hasError('pattern')">
+            <input type="email" matInput name="email" [(ngModel)]="user.email" #emailVar="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+" required>
+            <mat-error *ngIf="emailVar.hasError('pattern') && emailVar.tought">
                 Login should contain only Latin letters
             </mat-error>
-            <mat-error *ngIf="loginForm.controls['loginFormControl'].hasError('required')">
+            <mat-error *ngIf="emailVar.hasError('required') && emailVar.tought">
                 Login is <strong>required</strong>
             </mat-error>
         </mat-form-field>
@@ -14,15 +14,13 @@
     <p>
         <mat-form-field class="example-full-width" hintLabel="Min 6 characters" appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput #input [type]="hide ? 'password' : 'text'" matInput formControlName="passwordFormControl">
+            <input matInput #input [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="user.password"
+            #passwordVar="ngModel" required minlength="6">
             <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
-            <mat-error *ngIf="loginForm.controls['passwordFormControl'].hasError('pattern')">
-                Password should contain only letters and numbers
-            </mat-error>
-            <mat-error *ngIf="loginForm.controls['passwordFormControl'].hasError('minLength')">
+            <mat-error *ngIf="passwordVar.hasError('minLength') && passwordVar.tought">
                 Min-length of field is 6 characters
             </mat-error>
-            <mat-error *ngIf="loginForm.controls['passwordFormControl'].hasError('required')">
+            <mat-error *ngIf="passwordVar.hasError('required') && passwordVar.tought">
                 Password is <strong>required</strong>
             </mat-error>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -35,3 +33,5 @@
         Login
     </button>
 </form>
+
+<p>If you don't have an account you can <a href="#">Registration</a></p>

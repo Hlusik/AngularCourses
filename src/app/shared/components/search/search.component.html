@@ -1,1 +1,10 @@
-<p>search works!</p>
+<form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+    <mat-form-field class="example-full-width">
+        <mat-label>Search</mat-label>
+        <input type="text" matInput placeholder="search" [(ngModel)]="searchValue" name="search">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+        <ng-container> Search </ng-container>
+        <mat-icon aria-hidden="false">search</mat-icon>
+    </button>
+</form>

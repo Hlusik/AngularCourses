@@ -1,4 +1,10 @@
+<app-header></app-header>
+<app-search searchPlaceHolder="search"></app-search>
 <ng-container *ngIf="items;">
     <app-course-card *ngFor="let item of items | async" [course]='item'></app-course-card>
 </ng-container>
 <app-info *ngIf="!items;" [title]="title" [text]="text" [buttonText]="buttonText"></app-info>
+
+<!-- <app-course></app-course> -->
+<app-login></app-login>
+<app-registrtion></app-registrtion>
