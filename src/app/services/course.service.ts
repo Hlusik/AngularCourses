@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Author } from 'src/app/shared/components/models/author';
-import { Course } from 'src/app/shared/components/models/course';
+import { Author } from 'src/app/models/author';
+import { Course } from 'src/app/models/course';
 
 const mockedCourseList = [
   new Course(

@@ -1,8 +1,8 @@
-import { CourseService } from './../services/course.service';
-import { Course } from '../../shared/components/models/course';
+import { CourseService } from '../../services/course.service';
+import { Course } from '../../models/course';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Author } from 'src/app/shared/components/models/author';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Author } from 'src/app/models/author';
 
 @Component({
   selector: 'app-course',
@@ -25,12 +25,12 @@ export class CourseComponent implements OnInit {
     this.authors.then(data => this.addedAuthors = data.map(item => ({ ...item })));
 
     this.courseForm = new FormGroup({
-      titleFormControl: new FormControl('', { validators: [Validators.required] }),
-      descriptionFormControl: new FormControl('', { validators: [Validators.required] }),
-      creationDateFormControl: new FormControl('', { validators: [Validators.required] }),
-      durationFormControl: new FormControl('', { validators: [Validators.required] }),
-      authorsFormControl: new FormControl('', { validators: [Validators.required] }),
-      allAuthorsFormControl: new FormControl(this.addedAuthors[0], { validators: [Validators.required] }),
+      titleFormControl: new FormControl('', [Validators.required]),
+      descriptionFormControl: new FormControl('', [Validators.required]),
+      creationDateFormControl: new FormControl('', [Validators.required]),
+      durationFormControl: new FormControl('', [Validators.required, CourseComponent.positiveVal]),
+      authorsFormControl: new FormControl(''),
+      allAuthorsFormControl: new FormControl(this.addedAuthors[0]),
     });
   }
 
@@ -66,6 +66,14 @@ export class CourseComponent implements OnInit {
         }
       }
     });
+  }
+
+  static positiveVal(control: AbstractControl):{ [key: string]: any; } {
+    if (Number(control.value) <= 0) {
+      return { positiveVal: { valid: false, value: control.value } };
+    } else {
+      return null;
+    }
   }
 
 }
