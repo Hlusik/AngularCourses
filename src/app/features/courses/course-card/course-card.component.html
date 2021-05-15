@@ -7,7 +7,7 @@
             <b>Authors:</b>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
-            {{ course.authors }}
+            {{ course.authors | stringJoiner: ', ' }}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="5" [rowspan]="3">
             {{ course.description }}
@@ -16,13 +16,13 @@
             <b>Duration: </b>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
-            {{ durationHours }}
+            {{ course.duration | duration }}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             <b>Created: </b>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
-            {{ course.creationDate | date:'shortDate'}}
+            {{ course.creationDate | dotDividedShortDate}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="1">
             <app-button buttonText="Show Course"></app-button>

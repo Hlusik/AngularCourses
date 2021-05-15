@@ -1,3 +1,4 @@
+import { ValidatorsModule } from './../validators/validators.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,8 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ValidatorsModule
   ],
   exports: [RegistrationComponent]
 })

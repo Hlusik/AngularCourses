@@ -2,7 +2,7 @@
     <p>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Email</mat-label>
-            <input type="Email" matInput formControlName="emailFromControl">
+            <input type="Email" matInput formControlName="emailFromControl" required appEmailValidator>
             <mat-error *ngIf="registrationFrom.controls['emailFromControl'].hasError('pattern') && registrationFrom.controls['emailFromControl'].touched">
                 Please enter a valid email address
             </mat-error>
@@ -12,12 +12,9 @@
         </mat-form-field>
     </p>
     <p>
-        <mat-form-field class="example-full-width" hintLabel="Only Latin letters" appearance="fill">
+        <mat-form-field class="example-full-width" hintLabel="Min 6 characters" appearance="fill">
             <mat-label>Name</mat-label>
-            <input type="text" #input matInput formControlName="nameFromControl">
-            <mat-error *ngIf="registrationFrom.controls['nameFromControl'].hasError('pattern') && registrationFrom.controls['nameFromControl'].touched">
-                Name should contain only Latin letters
-            </mat-error>
+            <input type="text" #input matInput formControlName="nameFromControl" required minlength="6">
             <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
             <mat-error *ngIf="registrationFrom.controls['nameFromControl'].hasError('minLength') && registrationFrom.controls['nameFromControl'].touched">
                 Min-length of field is 6 characters
@@ -28,13 +25,9 @@
         </mat-form-field>
     </p>
     <p>
-        <mat-form-field class="example-full-width" hintLabel="Min 6 characters" appearance="fill">
+        <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput #input [type]="hide ? 'password' : 'text'" matInput formControlName="passwordFormControl">
-            <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
-            <mat-error *ngIf="registrationFrom.controls['passwordFormControl'].hasError('minLength') && registrationFrom.controls['passwordFormControl'].touched">
-                Min-length of field is 6 characters
-            </mat-error>
+            <input matInput #input [type]="hide ? 'password' : 'text'" matInput formControlName="passwordFormControl" required>
             <mat-error *ngIf="registrationFrom.controls['passwordFormControl'].hasError('required') && registrationFrom.controls['passwordFormControl'].touched">
                 Password is <strong>required</strong>
             </mat-error>

@@ -1,25 +1,21 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     <p>
         <mat-form-field class="example-full-width" hintLabel="Only Latin letters" appearance="fill">
-            <mat-label>Login</mat-label>
-            <input type="email" matInput name="email" [(ngModel)]="user.email" #emailVar="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+" required>
+            <mat-label>Email</mat-label>
+            <input type="email" matInput name="email" [(ngModel)]="user.email" #emailVar="ngModel" appEmailValidator required>
             <mat-error *ngIf="emailVar.hasError('pattern') && emailVar.tought">
-                Login should contain only Latin letters
+                Email should contain only Latin letters
             </mat-error>
             <mat-error *ngIf="emailVar.hasError('required') && emailVar.tought">
-                Login is <strong>required</strong>
+                Email is <strong>required</strong>
             </mat-error>
         </mat-form-field>
     </p>
     <p>
-        <mat-form-field class="example-full-width" hintLabel="Min 6 characters" appearance="fill">
+        <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Password</mat-label>
             <input matInput #input [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="user.password"
-            #passwordVar="ngModel" required minlength="6">
-            <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
-            <mat-error *ngIf="passwordVar.hasError('minLength') && passwordVar.tought">
-                Min-length of field is 6 characters
-            </mat-error>
+            #passwordVar="ngModel" required>
             <mat-error *ngIf="passwordVar.hasError('required') && passwordVar.tought">
                 Password is <strong>required</strong>
             </mat-error>

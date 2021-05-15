@@ -3,7 +3,7 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Title</mat-label>
             <input type="text" matInput formControlName="titleFormControl">
-            <mat-error *ngIf="courseForm.controls['titleFormControl'].hasError('required')">
+            <mat-error *ngIf="courseForm.controls['titleFormControl'].hasError('required') && courseForm.controls['titleFormControl'].touched">
                 Title is <strong>required</strong>
             </mat-error>
         </mat-form-field>
@@ -12,7 +12,7 @@
         <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="descriptionFormControl"></textarea>
-            <mat-error *ngIf="courseForm.controls['descriptionFormControl'].hasError('required')">
+            <mat-error *ngIf="courseForm.controls['descriptionFormControl'].hasError('required') && courseForm.controls['descriptionFormControl'].touched">
                 Description is <strong>required</strong>
             </mat-error>
         </mat-form-field>
@@ -26,40 +26,38 @@
         </mat-form-field>
     </p>
     <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Add authors</mat-label>
+            <input type="text" matInput formControlName="newAuthorsFormControl">
+            <mat-error *ngIf="courseForm.controls['newAuthorsFormControl'].hasError('pattern') && courseForm.controls['newAuthorsFormControl'].touched">
+                Authors should contain only <strong>Latin letters</strong>
+            </mat-error>
+        </mat-form-field>
+        <button mat-icon-button color="primary" aria-label="Add new author" (click)="addNewAuthor()"
+            matTooltip="Add new author" [disabled]="courseForm.controls['newAuthorsFormControl'].hasError('pattern')">
+            <mat-icon>add_circle_outline</mat-icon>
+        </button>
+    </p>
+    <section formArrayName="authorsFormControl">
+        <article *ngFor="let item of courseForm.get('authorsFormControl')['controls']; let i = index">
+            <p>{{ item.value.authorName }}</p>
+            <button class="float-left" mat-icon-button color="primary" aria-label="Remove/clear"
+                (click)="deleteAuthor(i)" matTooltip="Delete author">
+                <mat-icon>highlight_off</mat-icon>
+            </button>
+        </article>
+    </section>
+    <p>
         <mat-form-field appearance="fill">
             <mat-label>Duration</mat-label>
-            <textarea matInput formControlName="durationFormControl"></textarea>
-            <mat-error *ngIf="courseForm.controls['durationFormControl'].hasError('required')">
+            <input type="text" matInput formControlName="durationFormControl" />
+            <mat-error *ngIf="courseForm.controls['durationFormControl'].hasError('required') && courseForm.controls['durationFormControl'].touched">
                 Duration is <strong>required</strong>
             </mat-error>
         </mat-form-field>
-        <label>Duration 00:00 hours</label>
+        <label>Duration: {{ courseForm.controls['durationFormControl'].value | duration}}</label>
     </p>
-    <p>
-        <mat-form-field appearance="fill">
-            <mat-label>List of authors</mat-label>
-            <mat-select multiple formControlName="allAuthorsFormControl">
-                <mat-option *ngFor="let author of addedAuthors" [value]="author.id">
-                    {{author.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- <app-button buttonImgName="chevron_right"></app-button> -->
-        <button mat-raised-button color="primary" (click)="onMoveRight()">
-            <mat-icon aria-hidden="false">chevron_right</mat-icon>
-        </button>
-        <button mat-raised-button color="primary" (click)="onMoveLeft()">
-            <mat-icon aria-hidden="false">chevron_left</mat-icon>
-        </button>
-        <!-- <app-button buttonImgName="chevron_left"></app-button> -->
-        <mat-form-field appearance="fill">
-            <mat-select multiple formControlName="authorsFormControl">
-                <mat-option *ngFor="let author of removedAuthors" [value]="author.id">
-                    {{author.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </p>
+
     <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">
         Create course
     </button>
