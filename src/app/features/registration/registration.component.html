@@ -1,1 +1,45 @@
-<p>registration works!</p>
+<form [formGroup]="registrationFrom" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="Email" matInput formControlName="emailFromControl" required appEmailValidator>
+            <mat-error *ngIf="registrationFrom.controls['emailFromControl'].hasError('pattern') && registrationFrom.controls['emailFromControl'].touched">
+                Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="registrationFrom.controls['emailFromControl'].hasError('required') && registrationFrom.controls['emailFromControl'].touched">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="example-full-width" hintLabel="Min 6 characters" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" #input matInput formControlName="nameFromControl" required minlength="6">
+            <mat-hint align="end">{{input.value?.length || 0}}</mat-hint>
+            <mat-error *ngIf="registrationFrom.controls['nameFromControl'].hasError('minLength') && registrationFrom.controls['nameFromControl'].touched">
+                Min-length of field is 6 characters
+            </mat-error>
+            <mat-error *ngIf="registrationFrom.controls['nameFromControl'].hasError('required') && registrationFrom.controls['nameFromControl'].touched">
+                Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput #input [type]="hide ? 'password' : 'text'" matInput formControlName="passwordFormControl" required>
+            <mat-error *ngIf="registrationFrom.controls['passwordFormControl'].hasError('required') && registrationFrom.controls['passwordFormControl'].touched">
+                Password is <strong>required</strong>
+            </mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </p>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!registrationFrom.valid">
+        Registration
+    </button>
+</form>
+
+<p>If you have an account you can <a href="#">Login</a></p>

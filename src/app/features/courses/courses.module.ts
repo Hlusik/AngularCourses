@@ -1,3 +1,6 @@
+import { RegistrationModule } from './../registration/registration.module';
+import { LoginModule } from './../login/login.module';
+import { CourseModule } from './../course/course.module';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,7 +15,10 @@ import {MatCardModule} from '@angular/material/card';
     CommonModule,
     MatGridListModule,
     SharedModule,
-    MatCardModule
+    MatCardModule,
+    CourseModule,
+    LoginModule,
+    RegistrationModule
   ],
   exports: [
     CoursesComponent
