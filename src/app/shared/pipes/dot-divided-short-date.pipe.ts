@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DotDividedShortDatePipe implements PipeTransform {
 
-  transform(date: Date): unknown {
+  transform(date: Date): string {
     return  `${date.getDay()}.${date.getMonth()}.${date.getFullYear()}`;
   }
 

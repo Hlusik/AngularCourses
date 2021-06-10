@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(loginForm: NgForm): void {
-    console.log(`Saved: ${JSON.stringify(loginForm.value)}`);
+  onSubmit(): void {
+    console.log(`Saved: ${JSON.stringify(this.user)}`);
   }
 
 }

@@ -27,11 +27,11 @@
     <p>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput #input [type]="hide ? 'password' : 'text'" matInput formControlName="passwordFormControl" required>
-            <mat-error *ngIf="registrationFrom.controls['passwordFormControl'].hasError('required') && registrationFrom.controls['passwordFormControl'].touched">
+            <input matInput #input [type]="hide ? 'password' : 'text'" matInput formControlName="password" required>
+            <mat-error *ngIf="registrationFrom.controls['password'].hasError('required') && registrationFrom.controls['password'].touched">
                 Password is <strong>required</strong>
             </mat-error>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>

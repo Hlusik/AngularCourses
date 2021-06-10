@@ -15,8 +15,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onFormSubmit(form: FormGroup) {
-    console.log(JSON.stringify(form.value));
+  onFormSubmit() {
+    console.log(JSON.stringify(this.searchValue));
   }
 
 }

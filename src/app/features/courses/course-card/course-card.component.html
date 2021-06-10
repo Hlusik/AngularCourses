@@ -25,7 +25,7 @@
             {{ course.creationDate | dotDividedShortDate}}
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="1">
-            <app-button buttonText="Show Course"></app-button>
+            <app-button buttonText="Show Course" routerLink="/course/{{ course.id }}"></app-button>
         </mat-grid-tile>
     </mat-grid-list>
 </mat-card>

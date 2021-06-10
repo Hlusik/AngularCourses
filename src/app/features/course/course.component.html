@@ -2,17 +2,25 @@
     <p>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Title</mat-label>
-            <input type="text" matInput formControlName="titleFormControl">
-            <mat-error *ngIf="courseForm.controls['titleFormControl'].hasError('required') && courseForm.controls['titleFormControl'].touched">
+            <input type="text" matInput formControlName="title">
+            <mat-error
+                *ngIf="courseForm.controls['title'].hasError('required') && courseForm.controls['title'].touched">
                 Title is <strong>required</strong>
             </mat-error>
+            <!-- <mat-error
+                *ngIf="courseForm.title.invalid && (courseForm.title.dirty || courseForm.title.touched || courseForm.submitted)">
+                <div *ngIf="courseForm.title.errors?.required">
+                    Title is <strong>required</strong>
+                </div>
+            </mat-error> -->
         </mat-form-field>
     </p>
     <p>
         <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="descriptionFormControl"></textarea>
-            <mat-error *ngIf="courseForm.controls['descriptionFormControl'].hasError('required') && courseForm.controls['descriptionFormControl'].touched">
+            <textarea matInput formControlName="description"></textarea>
+            <mat-error
+                *ngIf="courseForm.controls['description'].hasError('required') && courseForm.controls['description'].touched">
                 Description is <strong>required</strong>
             </mat-error>
         </mat-form-field>
@@ -20,7 +28,7 @@
     <p>
         <mat-form-field appearance="fill">
             <mat-label>Creation date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="creationDateFormControl">
+            <input matInput [matDatepicker]="picker" formControlName="creationDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -28,18 +36,19 @@
     <p>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Add authors</mat-label>
-            <input type="text" matInput formControlName="newAuthorsFormControl">
-            <mat-error *ngIf="courseForm.controls['newAuthorsFormControl'].hasError('pattern') && courseForm.controls['newAuthorsFormControl'].touched">
+            <input type="text" matInput formControlName="newAuthors">
+            <mat-error
+                *ngIf="courseForm.controls['newAuthors'].hasError('pattern') && courseForm.controls['newAuthors'].touched">
                 Authors should contain only <strong>Latin letters</strong>
             </mat-error>
         </mat-form-field>
         <button mat-icon-button color="primary" aria-label="Add new author" (click)="addNewAuthor()"
-            matTooltip="Add new author" [disabled]="courseForm.controls['newAuthorsFormControl'].hasError('pattern')">
+            matTooltip="Add new author" [disabled]="courseForm.controls['newAuthors'].hasError('pattern')">
             <mat-icon>add_circle_outline</mat-icon>
         </button>
     </p>
-    <section formArrayName="authorsFormControl">
-        <article *ngFor="let item of courseForm.get('authorsFormControl')['controls']; let i = index">
+    <section formArrayName="authors">
+        <article *ngFor="let item of courseForm.get('authors')['controls']; let i = index">
             <p>{{ item.value.authorName }}</p>
             <button class="float-left" mat-icon-button color="primary" aria-label="Remove/clear"
                 (click)="deleteAuthor(i)" matTooltip="Delete author">
@@ -50,18 +59,24 @@
     <p>
         <mat-form-field appearance="fill">
             <mat-label>Duration</mat-label>
-            <input type="text" matInput formControlName="durationFormControl" />
-            <mat-error *ngIf="courseForm.controls['durationFormControl'].hasError('required') && courseForm.controls['durationFormControl'].touched">
-                Duration is <strong>required</strong>
+            <input type="text" min="0" matInput formControlName="duration" />
+            <mat-error
+                *ngIf="courseForm.controls['duration'].invalid && (courseForm.controls['duration'].dirty || courseForm.controls['duration'].touched)">
+                <div *ngIf="courseForm.controls['duration'].errors?.required">
+                    Duration is <strong>required</strong>
+                </div>
+                <div *ngIf="courseForm.controls['duration'].errors?.min">
+                    Duration should be above <strong>0</strong>
+                </div>
             </mat-error>
         </mat-form-field>
-        <label>Duration: {{ courseForm.controls['durationFormControl'].value | duration}}</label>
+        <label>Duration: {{ courseForm.controls['duration'].value | duration}}</label>
     </p>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">
+    <button mat-raised-button color="primary" type="submit">
         Create course
     </button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!courseForm.valid">
+    <button ype="button" mat-raised-button color="primary" type="submit">
         Cancel
     </button>
 </form>
