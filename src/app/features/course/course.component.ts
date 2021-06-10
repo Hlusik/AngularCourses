@@ -17,12 +17,12 @@ export class CourseComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.courseForm = this.fb.group({
-      titleFormControl: new FormControl('', [Validators.required]),
-      descriptionFormControl: new FormControl('', [Validators.required]),
-      creationDateFormControl: new FormControl('', [Validators.required]),
-      durationFormControl: new FormControl(0, [Validators.required, Validators.min(0)]),
-      newAuthorsFormControl: new FormControl('', [latinLettersAndNumbersValidation]),
-      authorsFormControl: this.fb.array([]),
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      creationDate: new FormControl('', [Validators.required]),
+      duration: new FormControl(0, [Validators.required, Validators.min(0)]),
+      newAuthors: new FormControl('', [latinLettersAndNumbersValidation]),
+      authors: this.fb.array([]),
     });
   }
 
@@ -34,7 +34,7 @@ export class CourseComponent implements OnInit {
   }
 
   get formArr() {
-    return this.courseForm.get('authorsFormControl') as FormArray;
+    return this.courseForm.get('authors') as FormArray;
   }
 
   authorList(str) {
@@ -44,7 +44,7 @@ export class CourseComponent implements OnInit {
   }
 
   addNewAuthor() {
-    this.formArr.push(this.authorList(this.courseForm.get('newAuthorsFormControl').value));
+    this.formArr.push(this.authorList(this.courseForm.get('newAuthors').value));
   }
 
   deleteAuthor(index: number) {

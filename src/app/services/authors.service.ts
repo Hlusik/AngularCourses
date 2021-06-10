@@ -2,23 +2,22 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, publish, refCount, share, concatMap } from 'rxjs/operators';
-import { Course } from '../models/course';
-import { CoursesAPI } from './service.config';
+import { Author } from '../models/author';
+import { AuthorsAPI } from './service.config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CoursesService {
+export class AuthorsService {
 
   constructor(
     private http: HttpClient,
-    @Inject(CoursesAPI) private coursesUrl: string
+    @Inject(AuthorsAPI) private authorsUrl: string
   ) { }
 
-  getAllCourses(): Observable<Course[]> {
-    const url = `${this.coursesUrl}/all`;
-
-    return this.http.get<Course[]>(url).pipe(
+  getAllAuthors(): Observable<Author[]> {
+    const url = `${this.authorsUrl}/all`;
+    return this.http.get<Author[]>(url).pipe(
       retry(3),
       publish(),
       refCount(),
@@ -26,36 +25,36 @@ export class CoursesService {
     );
   }
 
-  createCourse(course: Course): Observable<Course> {
-    const url = `${this.coursesUrl}/add`;
-    const body = JSON.stringify(course);
+  addAuthor(author: Author): Observable<Author> {
+    const url = `${this.authorsUrl}/add`;
+    const body = JSON.stringify(author);
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     return this.http
-      .post<Course>(url, body, options)
+      .post<Author>(url, body, options)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  editCourse(course: Course): Observable<Course> {
-    const url = `${this.coursesUrl}/${course.id}`;
-    const body = JSON.stringify(course);
+  editAuthor(author: Author): Observable<Author> {
+    const url = `${this.authorsUrl}/${author.id}`;
+    const body = JSON.stringify(author);
     const options = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
     return this.http
-      .put<Course>(url, body, options)
+      .put<Author>(url, body, options)
       .pipe(catchError(this.handleError));
   }
 
-  getCourse(id: number): Observable<Course> {
-    const url = `${this.coursesUrl}/${id}`;
+  getAuthor(id: number): Observable<Author> {
+    const url = `${this.authorsUrl}/${id}`;
 
-    return this.http.get<Course>(url)
+    return this.http.get<Author>(url)
       .pipe(
         retry(3),
         share(), // = publish() + refCount()
@@ -63,11 +62,11 @@ export class CoursesService {
       );
   }
 
-  deleteCourse(course: Course): Observable<Course[]> {
-    const url = `${this.coursesUrl}/${course.id}`;
+  deleteAuthor(author: Author): Observable<Author[]> {
+    const url = `${this.authorsUrl}/${author.id}`;
 
     return this.http.delete(url).pipe(
-      concatMap(() => this.getAllCourses()),
+      concatMap(() => this.getAllAuthors()),
       catchError(this.handleError)
     );
   }

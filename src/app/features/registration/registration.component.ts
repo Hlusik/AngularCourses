@@ -12,9 +12,9 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.registrationFrom = fb.group({
-      emailFromControl: new FormControl('', { validators:[Validators.required]}),
-      nameFromControl: new FormControl('', { validators: [Validators.minLength(6), Validators.required ]}),
-      passwordFormControl: new FormControl('', { validators: [Validators.required] }),
+      email: new FormControl('', { validators:[Validators.required]}),
+      name: new FormControl('', { validators: [Validators.minLength(6), Validators.required ]}),
+      password: new FormControl('', { validators: [Validators.required] }),
     });
   }
 

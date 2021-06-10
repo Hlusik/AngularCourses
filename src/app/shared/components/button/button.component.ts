@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-button',
@@ -8,13 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ButtonComponent implements OnInit {
   @Input() buttonText: string;
   @Input() buttonImgName: string;
+  @Input() routerLink: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  onlogin(): void {
-
+  btnClick(): void {
+    this.router.navigateByUrl(this.routerLink);
   }
 }
